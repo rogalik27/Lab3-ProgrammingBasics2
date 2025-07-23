@@ -130,3 +130,39 @@ void replaceNegativesWithSquares(Matrix& m) {
             if (m[i][j] < 0)
                 m[i][j] *= m[i][j];
 }
+
+int main() {
+    try {
+        Matrix a(2, 3), b(2, 3), c(3, 2);
+        std::cout << "Enter matrix A (2x3):\n";
+        std::cin >> a;
+        std::cout << "Enter matrix B (2x3):\n";
+        std::cin >> b;
+        std::cout << "Enter matrix C (3x2):\n";
+        std::cin >> c;
+
+        std::cout << "\nMatrix A:\n" << a;
+        std::cout << "Matrix B:\n" << b;
+        std::cout << "Matrix C:\n" << c;
+
+        std::cout << "\nA + B:\n" << (a + b);
+        std::cout << "A - B:\n" << (a - b);
+        std::cout << "A * C:\n" << (a * c);
+
+        std::cout << "\nModifying matrix A (replace negatives with squares)...\n";
+        replaceNegativesWithSquares(a);
+        std::cout << "Modified Matrix A:\n" << a;
+
+        std::cout << "\nTrying A + C (should fail):\n";
+        Matrix fail = a + c;
+
+    } catch (const MatrixSizeMismatch& ex) {
+        std::cerr << "Matrix size error: " << ex.what() << '\n';
+    } catch (const MatrixIndexOutOfBounds& ex) {
+        std::cerr << "Index error: " << ex.what() << '\n';
+    } catch (const std::exception& ex) {
+        std::cerr << "General error: " << ex.what() << '\n';
+    }
+
+    return 0;
+}
